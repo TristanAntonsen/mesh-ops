@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 nom_stl = "0.2"
+nalgebra = "0.27"

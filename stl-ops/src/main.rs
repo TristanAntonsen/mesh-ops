@@ -8,17 +8,74 @@ fn main() {
     // let filename = &args[1];
 
 
-    let file = File::open("../stl/3DBenchy.stl").unwrap();
+    let file = File::open("../stl/cube_binary.stl").unwrap();
     // let file = File::open(filename).unwrap();
     let mut root_vase = BufReader::new(&file);
     let mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
 
-    println!("Calculating centroid. . .");
+    // println!("Calculating centroid. . .");
 
-    let centroid = calculate_centroid(mesh);
+    // let centroid = calculate_centroid(mesh);
 
-    println!("Centroid: {:?}", centroid)
+    // println!("Centroid: {:?}", centroid)
+
+    calculate_volume(mesh);
 }
+
+fn calculate_volume(mesh: nom_stl::Mesh) -> f32 {
+    let triangles = mesh.triangles();
+    let tri_count : i32 = triangles.len() as i32;    
+    let volume = 0.0;
+    
+    for triangle in triangles {
+        let tri_verts = triangle.vertices(); 
+        let v1 = tri_verts[0];
+        let v2 = tri_verts[1];
+        let v3 = tri_verts[2];
+        let cross = cross(v1,v3);
+
+        // let dot = dot(&cross, v3);
+
+
+        println!("Vector 1:      {:?}",tri_verts[0]);
+        println!("Vector 2:      {:?}",tri_verts[1]);
+        println!("Cross product: {:?}",cross);
+    }
+
+
+    volume
+}
+
+
+// fn calc_tet_volume(triangle: Vec<f32>) -> f32 {
+//     let v = (1 / 6) * 
+// }
+
+fn cross(A : [f32; 3], B : [f32; 3]) -> [f32; 3] {
+
+
+    let i = A[1] * B[2] - A[2] * B[1];
+
+    let j = A[2] * B[0] - A[0] * B[2];
+
+    let k = A[0] * B[1] - A[1] * B[0];
+
+    let cross = [i, j, k];
+
+    cross
+
+}
+
+fn dot(A : [f32; 3], B : [f32; 3]) -> [f32; 3] {
+    let i = A[0] * B[0];
+    let j = A[1] * B[1];
+    let k = A[2] * B[2];
+
+    let dot = [i, j, k];
+
+    dot
+}
+
 
 fn calculate_centroid(mesh: nom_stl::Mesh) -> Vec<f32> {
     let triangles = mesh.triangles();
