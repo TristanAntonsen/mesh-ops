@@ -6,14 +6,14 @@ mod calcs;
 
 fn main() {
 
-    let file = File::open("../stl/sphere.stl").unwrap();
+    let file = File::open("../stl/flourite.stl").unwrap();
     let mut root_vase = BufReader::new(&file);
     let mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
 
     let volume = calcs::calculate_volume(&mesh);
-    let centroid = calcs::calculate_centroid(&mesh);
+    // let centroid = calcs::calculate_centroid(&mesh);
     
     println!("Volume: {}",volume);
-    println!("Centroid: {:?}",centroid);
+    // println!("Centroid: {:?}",centroid);
 }
 
