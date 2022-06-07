@@ -1,23 +1,13 @@
 use std::io::BufReader;
 use std::fs::File;
-// use std::env;
 extern crate stl_ops;
 
 fn main() {
-    // let args: Vec<String> = env::args().collect();
-    // let filename = &args[1];
-
 
     let file = File::open("../stl/sphere.stl").unwrap();
-    // let file = File::open(filename).unwrap();
     let mut root_vase = BufReader::new(&file);
     let mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
 
-    // println!("Calculating centroid. . .");
-
-    // let centroid = calculate_centroid(mesh);
-
-    // println!("Centroid: {:?}", centroid)
 
     calculate_volume(mesh);
 }
