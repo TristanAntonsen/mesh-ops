@@ -1,5 +1,39 @@
 use crate::linalg;
 
+
+pub fn calculate_surface_area(mesh: &nom_stl::Mesh) -> f32 {
+    let triangles = mesh.triangles();
+    let mut area = 0.0;
+
+    for triangle in triangles {
+
+        let tri_area = calculate_triangle_area(triangle);
+        area = area + tri_area;
+    }
+    
+    area
+}
+
+
+pub fn calculate_triangle_area(triangle: &nom_stl::Triangle) -> f32 {
+
+    let a = triangle.vertices()[0];
+    let b = triangle.vertices()[1];
+    let c = triangle.vertices()[2];
+
+    let ab = [b[0]-a[0], b[1]-a[1], b[2]-a[2]];
+    let ac = [c[0]-a[0], c[1]-a[1], c[2]-a[2]];
+
+    let cross = linalg::cross(ab, ac);
+
+    let area = linalg::norm(cross) / 2.0;
+
+    area
+}
+
+
+// fn calculate_triangle_area(triangle)
+
 pub fn calculate_centroid(mesh: &nom_stl::Mesh) -> Vec<f32> {
     let triangles = mesh.triangles();
     let tri_count : f32 = triangles.len() as f32;
