@@ -27,9 +27,9 @@ pub fn create_mesh(nom_mesh: nom_stl::Mesh) -> HashMap<i32, [[f32; 3]; 3]> {
 
 
     // println!("{:?}",vertex_ids.get(&1))
-    for (key, value) in &tris {
-        println!("{}: {:?}",key, value);
-    }
+    // for (key, value) in &tris {
+    //     println!("{}: {:?}",key, value);
+    // }
 
     tris    
 

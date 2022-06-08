@@ -4,7 +4,7 @@ mod parsing;
 
 fn main() {
     
-    let mesh = parsing::import(String::from("../stl/cube_binary.stl"));
+    let mesh = parsing::import(String::from("../stl/flourite.stl"));
     let tricount = mesh.triangles().len();
     let volume = calcs::calculate_volume(&mesh);
     let surface_area = calcs::calculate_surface_area(&mesh);
@@ -19,6 +19,6 @@ fn main() {
 
 }
 
-fn print_type_of<T>(_: &T) {
-    println!("{}", std::any::type_name::<T>())
-}
+// fn print_type_of<T>(_: &T) {
+//     println!("{}", std::any::type_name::<T>())
+// }
