@@ -1,5 +1,5 @@
 use crate::linalg;
-
+use crate::parsing;
 
 pub fn calculate_surface_area(mesh: &nom_stl::Mesh) -> f32 {
     let triangles = mesh.triangles();
@@ -70,12 +70,15 @@ pub fn calculate_centroid(mesh: &nom_stl::Mesh) -> Vec<f32> {
 }
 
 
-pub fn calculate_volume(mesh: &nom_stl::Mesh) -> f32 {
-    let triangles = mesh.triangles();
+pub fn calculate_volume(mesh: parsing::Mesh) -> f32 {
+    let triangles = mesh.triangles;
+    let vertices = mesh.vertices;
     let mut volume = 0.0;
     
+    
     for triangle in triangles {
-        let tri_verts = triangle.vertices(); 
+        let triangle = triangle as usize;
+        let tri_verts = vertices[triangle]; 
         let v1 = tri_verts[0];
         let v2 = tri_verts[1];
         let v3 = tri_verts[2];

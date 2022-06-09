@@ -3,13 +3,15 @@ use std::fs::File;
 use std::collections::HashMap;
 // use std::env;
 
-pub fn import(path: String) -> nom_stl::Mesh {
+pub fn import(path: String) -> Mesh {
     // let args: Vec<String> = env::args().collect();
     // let filename = &args[1];
     // let file = File::open(filename).unwrap();
     let file = File::open(path).unwrap();
     let mut root_vase = BufReader::new(&file);
-    let mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
+    let nom_mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
+    let mesh = create_mesh(nom_mesh);
+    
     mesh
 }
 
@@ -38,8 +40,8 @@ pub fn create_mesh(nom_mesh: nom_stl::Mesh) -> Mesh {
 }
 
 pub struct Mesh {
-    triangles: Vec<i32>,
-    vertices: Vec<[[f32; 3]; 3]>,
+    pub triangles: Vec<i32>,
+    pub vertices: Vec<[[f32; 3]; 3]>,
 }
 
 // Structure for mesh:
