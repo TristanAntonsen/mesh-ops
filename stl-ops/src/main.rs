@@ -12,10 +12,9 @@ fn main() {
     
     parsing::create_mesh(mesh);
     println!("Triangle count: {}",tricount);
-    println!("Volume: {}",volume);
-    println!("Surface Area: {}",surface_area);
-    println!("Centroid: {:?}",centroid);
-
+    println!("Volume: {:.0} mm^3",volume);
+    println!("Surface Area: {:.0} mm^2",surface_area);
+    println!("Centroid: ({:.3},{:.3},{:.3})",centroid[0],centroid[1],centroid[2]);
 
 }
 
