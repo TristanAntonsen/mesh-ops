@@ -3,7 +3,8 @@ use std::fs::File;
 use std::collections::HashMap;
 // use std::env;
 
-pub fn import(path: String) -> Mesh {
+pub fn import(path: &str) -> Mesh {
+    let path = String::from(path);
     // let args: Vec<String> = env::args().collect();
     // let filename = &args[1];
     // let file = File::open(filename).unwrap();
@@ -11,7 +12,7 @@ pub fn import(path: String) -> Mesh {
     let mut root_vase = BufReader::new(&file);
     let nom_mesh: nom_stl::Mesh = nom_stl::parse_stl(&mut root_vase).unwrap();
     let mesh = create_mesh(nom_mesh);
-    
+
     mesh
 }
 
