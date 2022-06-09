@@ -13,26 +13,33 @@ pub fn import(path: String) -> nom_stl::Mesh {
     mesh
 }
 
-pub fn create_mesh(nom_mesh: nom_stl::Mesh) -> HashMap<i32, [[f32; 3]; 3]> {
+pub fn create_mesh(nom_mesh: nom_stl::Mesh) -> Mesh {
 
     let nom_tris = nom_mesh.triangles();
-    let mut tris = HashMap::new();
     let mut i = 0;
+    let mut id_vector: Vec<i32> = Vec::new();
+    let mut vertex_vector: Vec<[[f32; 3]; 3]> = Vec::new();
 
     for triangle in nom_tris {
         let vertices = triangle.vertices();
-        tris.insert(i, vertices);
+        id_vector.push(i);
+        vertex_vector.push(vertices);
         i = i + 1;
+        // println!("{}{:?}",i,vertices)
     }
 
+    let new_mesh = Mesh {
+        triangles: id_vector,
+        vertices: vertex_vector
+    };
 
-    // println!("{:?}",vertex_ids.get(&1))
-    // for (key, value) in &tris {
-    //     println!("{}: {:?}",key, value);
-    // }
+    new_mesh    
 
-    tris    
+}
 
+pub struct Mesh {
+    triangles: Vec<i32>,
+    vertices: Vec<[[f32; 3]; 3]>,
 }
 
 // Structure for mesh:
