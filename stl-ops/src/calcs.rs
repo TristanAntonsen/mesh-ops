@@ -33,7 +33,32 @@ pub fn calculate_triangle_area(triangle: [[f32; 3]; 3]) -> f32 {
 }
 
 
-// fn calculate_triangle_area(triangle)
+pub fn calculate_bbox(mesh: parsing::Mesh) -> [f32;3] {
+    let vertices = mesh.vertices;
+
+    let mut x_vals = Vec::new();
+    let mut y_vals = Vec::new();
+    let mut z_vals = Vec::new();
+
+    for triangle in vertices {
+        for tri in triangle{
+            x_vals.push(tri[0]);
+            y_vals.push(tri[1]);
+            z_vals.push(tri[2]);
+        }
+    };
+
+    let (x_min,x_max) = linalg::minmax(x_vals);
+    let (y_min,y_max) = linalg::minmax(y_vals);
+    let (z_min,z_max) = linalg::minmax(z_vals);
+
+    let x_dim = x_max - x_min;
+    let y_dim = y_max - y_min;
+    let z_dim = z_max - z_min;
+
+    [x_dim, y_dim, z_dim]
+
+}
 
 pub fn calculate_centroid(mesh: parsing::Mesh) -> Vec<f32> {
     let triangles = mesh.triangles;

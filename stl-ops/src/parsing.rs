@@ -1,6 +1,5 @@
 use std::io::BufReader;
 use std::fs::File;
-use std::collections::HashMap;
 // use std::env;
 
 pub fn import(path: &str) -> Mesh {

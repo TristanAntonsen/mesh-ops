@@ -45,3 +45,20 @@ pub fn norm(v: [f32;3]) -> f32 {
     norm
 
 }
+
+pub fn minmax(array: Vec<f32>) -> (f32,f32) {
+
+    let mut min: f32 = 0.0;
+    let mut max: f32 = 0.0;
+
+    for item in array {
+        if item < min {
+            min = item
+        } else if item > max {
+            max = item
+        }
+    };
+
+    (min,max)
+
+}
