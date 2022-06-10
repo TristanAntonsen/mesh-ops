@@ -47,3 +47,26 @@ pub struct Mesh {
 // Structure for mesh:
 // vertex id hash map: {id : [x, y, z]}
 // edge hash map: {id: [vertex id1, vertex id2]}
+
+// pub fn export_ascii_stl(mesh: &Mesh) {
+//     let mut content = String::from("");
+//     let vertices = &mesh.vertices;
+//     content = content + "solid test_stl";
+//     for triangle in vertices {
+//         let v1 = triangle[0];
+//         let v2 = triangle[1];
+//         let v3 = triangle[2];
+        
+//         content = content + "facet normal 0 0 0\n";
+//         content = content + "    outer loop\n";
+//         content = content + format!("        vertex {} {} {}\n",v1[0],v1[1],v1[2]); 
+//         // content = content + format!("        vertex {} {} {}\n",v2[0],v2[1],v2[2]); 
+//         // content = content + format!("        vertex {} {} {}\n",v3[0],v3[1],v3[2]); 
+//         content = content + "    end loop\n";
+//         content = content + "endfacet\n";
+
+//     }
+
+
+//     std::fs::write("test.txt", content).expect("could not write file");
+// }

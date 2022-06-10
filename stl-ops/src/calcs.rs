@@ -60,8 +60,8 @@ pub fn calculate_bbox(mesh: parsing::Mesh) -> [f32;3] {
 
 }
 
-pub fn calculate_centroid(mesh: parsing::Mesh) -> Vec<f32> {
-    let triangles = mesh.triangles;
+pub fn calculate_centroid(mesh: &parsing::Mesh) -> Vec<f32> {
+    let triangles = &mesh.triangles;
     let tri_count : f32 = triangles.len() as f32;
     let mut centroid : Vec<f32> = Vec::new();
     let mut cx : f32 = 0.0;
@@ -69,7 +69,7 @@ pub fn calculate_centroid(mesh: parsing::Mesh) -> Vec<f32> {
     let mut cz : f32 = 0.0;
     
     for triangle in triangles {
-        let triangle = triangle as usize;
+        let triangle = *triangle as usize;
 
         let vertices = mesh.vertices[triangle];
     
